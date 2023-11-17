@@ -1,0 +1,47 @@
+
+const secretNumber = Math.floor(Math.random() * 100) + 1;
+
+let attempts = 0;
+let isGameWon = false;
+let score = 100;
+
+while (!isGameWon) {
+  const userGuess = prompt(`Guess a number between 1 and 100. Tries left: ${10 - attempts}\nCurrent Score: ${score}`);
+
+  if (userGuess === null) {
+    break;
+  }
+
+  const guess = parseInt(userGuess);
+
+  if (isNaN(guess) || guess < 1 || guess > 100) {
+    alert("Please enter a valid number between 1 and 100.");
+    continue;
+  }
+
+  attempts++;
+
+  if (guess === secretNumber) {
+    isGameWon = true;
+    alert(`Congratulations! You guessed the number in ${attempts} attempts. Your final score is ${score}.`);
+  } else {
+    const difference = Math.abs(secretNumber - guess);
+    score -= difference * 5;
+
+    const message = guess < secretNumber ? "Too low. Try again!" : "Too high. Try again!";
+
+    if (attempts === 10) {
+      alert(`Sorry, you've run out of attempts. The correct number was ${secretNumber}. Your final score is ${score}.`);
+      break;
+    }
+
+    alert(`${message} Tries left: ${10 - attempts}\nCurrent Score: ${score}`);
+  }
+}
+
+
+
+
+
+
+  
